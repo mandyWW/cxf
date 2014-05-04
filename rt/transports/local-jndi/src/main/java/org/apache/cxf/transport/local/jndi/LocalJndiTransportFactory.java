@@ -50,7 +50,7 @@ import org.apache.cxf.wsdl.http.AddressType;
 public class LocalJndiTransportFactory extends AbstractTransportFactory
     implements DestinationFactory, ConduitInitiator {
    
-    public static final String TRANSPORT_ID = "http://cxf.apache.org/transports/local";
+    public static final String TRANSPORT_ID = "http://cxf.apache.org/transports/local-jndi";
     public static final List<String> DEFAULT_NAMESPACES 
         = Arrays.asList(TRANSPORT_ID);
 
@@ -66,7 +66,7 @@ public class LocalJndiTransportFactory extends AbstractTransportFactory
         = LocalJndiTransportFactory.class.getName() + ".nulladdress";
 
     static {
-        URI_PREFIXES.add("local://");
+        URI_PREFIXES.add("local-jndi://");
     }
     
     private ConcurrentMap<String, Destination> destinations 
@@ -141,7 +141,7 @@ public class LocalJndiTransportFactory extends AbstractTransportFactory
         if (executor == null && bus != null) {
             WorkQueueManager manager = bus.getExtension(WorkQueueManager.class);
             if (manager != null) {
-                Executor ex =  manager.getNamedWorkQueue("local-transport");
+                Executor ex =  manager.getNamedWorkQueue("local-jndi-transport");
                 if (ex == null) {
                     ex = manager.getAutomaticWorkQueue();
                 }
